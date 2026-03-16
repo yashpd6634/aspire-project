@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import type { Card } from "../types/card";
 import { v4 as uuid } from "uuid";
 
@@ -22,46 +23,55 @@ const generateExpiry = () => {
   return "12/26";
 };
 
-export const useCardStore = create<CardState>((set) => ({
-  cards: [
+const defaultCard: Card = {
+  id: uuid(),
+  cardholderName: "Mark Henry",
+  cardNumber: generateCardNumber(),
+  expiryDate: generateExpiry(),
+  cvv: "456",
+  frozen: false,
+  color: "#01D167",
+};
+
+export const useCardStore = create<CardState>()(
+  persist(
+    (set) => ({
+      cards: [defaultCard],
+
+      addCard: (name) =>
+        set((state) => ({
+          cards: [
+            ...state.cards,
+            {
+              id: uuid(),
+              cardholderName: name,
+              cardNumber: generateCardNumber(),
+              expiryDate: generateExpiry(),
+              cvv: "123",
+              frozen: false,
+              color:
+                "#" +
+                ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
+            },
+          ],
+        })),
+
+      freezeCard: (id) =>
+        set((state) => ({
+          cards: state.cards.map((c) =>
+            c.id === id ? { ...c, frozen: true } : c,
+          ),
+        })),
+
+      unfreezeCard: (id) =>
+        set((state) => ({
+          cards: state.cards.map((c) =>
+            c.id === id ? { ...c, frozen: false } : c,
+          ),
+        })),
+    }),
     {
-      id: uuid(),
-      cardholderName: "Mark Henry",
-      cardNumber: generateCardNumber(),
-      expiryDate: generateExpiry(),
-      cvv: "456",
-      frozen: false,
-      color: "#01D167",
+      name: "aspire-cards-storage",
     },
-  ],
-
-  addCard: (name) =>
-    set((state) => ({
-      cards: [
-        ...state.cards,
-        {
-          id: uuid(),
-          cardholderName: name,
-          cardNumber: generateCardNumber(),
-          expiryDate: generateExpiry(),
-          cvv: "123",
-          frozen: false,
-          color:
-            "#" +
-            ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
-        },
-      ],
-    })),
-
-  freezeCard: (id) =>
-    set((state) => ({
-      cards: state.cards.map((c) => (c.id === id ? { ...c, frozen: true } : c)),
-    })),
-
-  unfreezeCard: (id) =>
-    set((state) => ({
-      cards: state.cards.map((c) =>
-        c.id === id ? { ...c, frozen: false } : c,
-      ),
-    })),
-}));
+  ),
+);
