@@ -15,7 +15,7 @@ const CardBalance: React.FC<Props> = ({
   return (
     <div className="mb-4 md:mb-4">
       {/* Mobile Header - Dark Blue */}
-      <div className="md:hidden bg-[#0C365A] -mx-6 -mt-6 px-6 pt-6 pb-4 mb-4">
+      <div className="md:hidden bg-[#0C365A] px-6 pt-6 pb-4 mb-0">
         {/* Logo for mobile */}
         <div className="flex justify-end mb-6">
           <img src={aspireLogo} alt="Aspire" className="h-6" />
@@ -68,13 +68,13 @@ const CardBalance: React.FC<Props> = ({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-6 border-[#0000001A] md:border-[#0000001A]">
+      <div className="flex gap-6 px-6 md:px-0 border-[#0000001A] md:border-[#0000001A]">
         <button
           onClick={() => setActiveTab("my")}
           className={`pb-2 text-[13px] md:text-[14px] font-semibold border-b-2 transition-colors ${
             activeTab === "my"
-              ? "text-[#222222] border-[#23CEFD]"
-              : "text-[#222222]/30 border-transparent"
+              ? "text-white md:text-[#222222] border-[#23CEFD]"
+              : "text-white/30 md:text-[#222222]/30 border-transparent"
           }`}
         >
           My debit cards
@@ -83,8 +83,8 @@ const CardBalance: React.FC<Props> = ({
           onClick={() => setActiveTab("company")}
           className={`pb-2 text-[13px] md:text-[14px] font-semibold border-b-2 transition-colors ${
             activeTab === "company"
-              ? "text-[#222222] border-[#23CEFD]"
-              : "text-[#222222]/30 border-transparent"
+              ? "text-white md:text-[#222222] border-[#23CEFD]"
+              : "text-white/30 md:text-[#222222]/30 border-transparent"
           }`}
         >
           All company cards

@@ -41,18 +41,15 @@ const Dashboard = () => {
       <Sidebar />
 
       {/* Main Content */}
-      <main className="flex-1 bg-white min-h-screen md:h-screen overflow-y-auto pb-20 md:pb-0">
-        <div className="p-6 md:p-15">
+      <main className="flex-1 bg-[#0C365A] md:bg-white min-h-screen md:h-screen overflow-y-auto pb-20 md:pb-0">
+        <div className="p-0 md:p-15">
           <CardBalance
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             onNewCard={() => setShowAddModal(true)}
           />
 
-          <div
-            className="flex flex-col md:flex-row gap-6 pt-10 pl-5 pr-5 pb-10 md:gap-7.5 bg-white rounded-lg"
-            style={{ filter: "drop-shadow(0 2px 12px #00000014)" }}
-          >
+          <div className="flex flex-col md:flex-row gap-6 pt-0 pb-0 md:pt-10 md:pl-5 md:pr-5 md:pb-10 md:gap-7.5 bg-[#0C365A] md:bg-white rounded-lg card-container-shadow">
             {/* Left Section - Card */}
             <div className="w-full md:w-126.5">
               <CardCarousel
@@ -70,7 +67,7 @@ const Dashboard = () => {
             </div>
 
             {/* Right Section - Details & Transactions */}
-            <div className="flex-1 md:max-w-126.5">
+            <div className="flex-1 md:max-w-126.5 bg-white px-4 pt-6 md:px-0 md:pt-0">
               {/* Card Details Accordion */}
               <div className="bg-white rounded-[10px] overflow-hidden shadow-sm">
                 <TransactionHeader

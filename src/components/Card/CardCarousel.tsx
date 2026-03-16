@@ -32,9 +32,9 @@ const CardCarousel: React.FC<Props> = ({
   }, [emblaApi, setActiveIndex]);
 
   return (
-    <div>
+    <div className="bg-[#0C365A] md:bg-transparent">
       {/* Carousel with padding */}
-      <div className="px-5">
+      <div className="px-6 md:px-5">
         {/* Show card number toggle - Vue style */}
         <div className="flex justify-end mb-3">
           <button

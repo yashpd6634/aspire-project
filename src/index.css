@@ -54,3 +54,14 @@ body {
     scrollbar-width: none;
   }
 }
+
+/* Card container shadow for desktop only */
+.card-container-shadow {
+  filter: none;
+}
+
+@media (min-width: 768px) {
+  .card-container-shadow {
+    filter: drop-shadow(0 2px 12px #00000014);
+  }
+}

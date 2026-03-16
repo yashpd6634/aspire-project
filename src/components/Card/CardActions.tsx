@@ -57,7 +57,7 @@ const CardActions: React.FC<Props> = ({ frozen, onFreeze }) => {
   ];
 
   return (
-    <div className="flex justify-around items-center bg-[#EDF3FF] py-5 px-5 h-29 rounded-2xl">
+    <div className="flex justify-around items-center bg-[#EDF3FF] py-5 px-5 h-29 rounded-t-2xl rounded-b-none md:rounded-2xl">
       {actions.map((action, i) => (
         <ActionButton
           key={i}
