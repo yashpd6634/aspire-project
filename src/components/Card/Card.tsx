@@ -21,28 +21,28 @@ const Card: React.FC<Props> = ({ card, showNumber }) => {
   return (
     <div
       className={`relative w-full aspect-[1.586/1] rounded-[12px] 
-      bg-[#01D167] p-6 text-white transition-all shadow-lg
+      bg-[#01D167] p-4 md:p-6 text-white transition-all shadow-lg
       ${card.frozen ? "opacity-70 grayscale" : "opacity-100"}`}
     >
       {/* Aspire Logo */}
       <div className="flex justify-end">
-        <img src={aspireLogo} className="h-[21px]" alt="Aspire" />
+        <img src={aspireLogo} className="h-5 md:h-[21px]" alt="Aspire" />
       </div>
 
       {/* Cardholder Name */}
-      <div className="mt-6 text-[22px] font-bold tracking-wide capitalize">
+      <div className="mt-4 md:mt-6 text-[20px] md:text-[22px] font-bold tracking-wide capitalize">
         {card.cardholderName}
       </div>
 
       {/* Card Number */}
-      <div className="flex gap-6 mt-6 mb-4 font-semibold tracking-[3.5px] text-[14px]">
+      <div className="flex gap-4 md:gap-6 mt-4 md:mt-6 mb-3 md:mb-4 font-semibold tracking-[3px] md:tracking-[3.5px] text-[13px] md:text-[14px]">
         {formatCardNumber(card.cardNumber).map((g, i) => (
           <span key={i}>{g}</span>
         ))}
       </div>
 
       {/* Expiry & CVV */}
-      <div className="flex gap-[35px] text-[13px] tracking-wide">
+      <div className="flex gap-6 md:gap-[35px] text-[12px] md:text-[13px] tracking-wide">
         <div className="flex gap-2">
           <span className="opacity-80">Thru:</span>
           <span className="font-semibold">{card.expiryDate}</span>
@@ -59,7 +59,7 @@ const Card: React.FC<Props> = ({ card, showNumber }) => {
       {/* Visa Logo */}
       <img
         src={visaLogo}
-        className="absolute bottom-6 right-6 h-[20px]"
+        className="absolute bottom-4 md:bottom-6 right-4 md:right-6 h-4 md:h-[20px]"
         alt="Visa"
       />
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Sidebar,
+  BottomNav,
   CardBalance,
   CardCarousel,
   CardActions,
@@ -36,35 +37,37 @@ const Dashboard = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
+      {/* Sidebar - Hidden on mobile */}
       <Sidebar />
 
       {/* Main Content */}
-      <main className="main-content flex-1 bg-[#0C365A0A] h-screen overflow-y-auto">
-        <div className="p-[60px]">
+      <main className="flex-1 bg-white min-h-screen md:h-screen overflow-y-auto pb-20 md:pb-0">
+        <div className="p-6 md:p-[60px]">
           <CardBalance
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             onNewCard={() => setShowAddModal(true)}
           />
 
-          <div className="flex gap-[30px]">
+          <div className="flex flex-col md:flex-row gap-6 pt-10 pl-5 pr-5 md:gap-[30px]">
             {/* Left Section - Card */}
-            <div className="w-[414px]">
+            <div className="w-full md:w-[414px]">
               {/* Show card number toggle */}
               <div className="flex justify-end mb-2">
                 <button
                   onClick={() => setShowCardNumber(!showCardNumber)}
-                  className="flex items-center gap-2 text-[#01D167] text-[12px] font-semibold"
+                  className="flex items-center gap-2 text-[#01D167] text-[12px] font-semibold bg-white px-3 py-1.5 rounded-md shadow-sm"
                 >
-                  <img
-                    src="/icons/eye.svg"
-                    alt="eye"
+                  <svg
                     className="w-4 h-4"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                    }}
-                  />
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
                   {showCardNumber ? "Hide card number" : "Show card number"}
                 </button>
               </div>
@@ -83,9 +86,9 @@ const Dashboard = () => {
             </div>
 
             {/* Right Section - Details & Transactions */}
-            <div className="flex-1 max-w-[406px]">
+            <div className="flex-1 md:max-w-[406px]">
               {/* Card Details Accordion */}
-              <div className="bg-white rounded-t-[10px] overflow-hidden shadow-sm">
+              <div className="bg-white rounded-[10px] overflow-hidden shadow-sm">
                 <TransactionHeader
                   title="Card details"
                   icon="/icons/card-details.svg"
@@ -102,7 +105,7 @@ const Dashboard = () => {
               </div>
 
               {/* Recent Transactions Accordion */}
-              <div className="bg-white rounded-b-[10px] overflow-hidden shadow-sm mt-6">
+              <div className="bg-white rounded-[10px] overflow-hidden shadow-sm mt-4 md:mt-6">
                 <TransactionHeader
                   title="Recent transactions"
                   icon="/icons/transactions.svg"
@@ -115,6 +118,9 @@ const Dashboard = () => {
           </div>
         </div>
       </main>
+
+      {/* Bottom Navigation - Mobile only */}
+      <BottomNav />
 
       {/* Add Card Modal */}
       {showAddModal && <AddCardModal onClose={() => setShowAddModal(false)} />}

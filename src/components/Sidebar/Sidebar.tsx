@@ -7,14 +7,18 @@ const Sidebar: React.FC = () => {
   const activeItem = "Cards";
 
   return (
-    <aside className="w-[340px] min-w-[340px] h-screen bg-[#0C365A] text-white py-12 flex flex-col sticky top-0">
-      <img src={aspireLogo} alt="Aspire" className="h-[35px] ml-12 mr-8 mb-5" />
+    <aside className="hidden md:flex w-[340px] min-w-[340px] h-screen bg-[#0C365A] text-white py-12 flex-col sticky top-0 overflow-hidden">
+      <img
+        src={aspireLogo}
+        alt="Aspire"
+        className="h-[35px] mx-12 mr-auto mb-5"
+      />
 
-      <p className="text-[15px] text-white/30 mx-12 leading-relaxed">
+      <p className="text-[15px] text-white/30 mx-12 leading-snug">
         Trusted way of banking for 3,000+ SMEs and startups in Singapore
       </p>
 
-      <nav className="mt-16 flex-1">
+      <nav className="mt-16">
         {sidebarItems.map((item) => (
           <SidebarNavItem
             key={item.label}

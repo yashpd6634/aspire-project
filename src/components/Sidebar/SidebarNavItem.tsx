@@ -12,25 +12,14 @@ const SidebarNavItem: React.FC<Props> = ({ icon, label, active, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className={clsx(
-        "flex items-center px-12 py-4 cursor-pointer transition-colors",
-        active ? "bg-[#0C365A]" : "hover:bg-white/5",
-      )}
+      className="flex items-center px-12 py-2 mb-15 cursor-pointer transition-colors"
     >
-      <img
-        src={icon}
-        alt={label}
-        className={clsx(
-          "w-6 h-6 mr-4",
-          active &&
-            "brightness-0 invert-[.45] sepia saturate-[20] hue-rotate-[100deg]",
-        )}
-      />
+      <img src={icon} alt={label} className="w-6 h-6 mr-4" />
 
       <span
         className={clsx(
           "text-[16px] font-medium",
-          active ? "text-[#01D167]" : "text-white",
+          active ? "text-[#01D167]" : "text-white hover:text-[#01D167]",
         )}
       >
         {label}

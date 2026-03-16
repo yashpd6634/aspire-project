@@ -1,4 +1,5 @@
 export { default as Sidebar } from "./Sidebar/Sidebar";
+export { default as BottomNav } from "./Navigation/BottomNav";
 
 export { default as Card } from "./Card/Card";
 export { default as CardBalance } from "./Card/CardBalance";

@@ -1,4 +1,5 @@
 import addIcon from "../../assets/add.svg";
+import aspireLogo from "../../assets/Aspire Logo.svg";
 
 interface Props {
   activeTab: "my" | "company";
@@ -12,9 +13,39 @@ const CardBalance: React.FC<Props> = ({
   onNewCard,
 }) => {
   return (
-    <div className="mb-8">
-      {/* Header with balance and new card button */}
-      <div className="flex justify-between items-start mb-5">
+    <div className="mb-6 md:mb-8">
+      {/* Mobile Header - Dark Blue */}
+      <div className="md:hidden bg-[#0C365A] -mx-6 -mt-6 px-6 pt-6 pb-4 mb-4">
+        {/* Logo for mobile */}
+        <div className="flex justify-end mb-6">
+          <img src={aspireLogo} alt="Aspire" className="h-6" />
+        </div>
+
+        <div className="flex justify-between items-start">
+          <div>
+            <div className="text-[14px] text-white/60 mb-2">
+              Account balance
+            </div>
+            <div className="flex items-center gap-2.5">
+              <span className="text-[12px] bg-[#01D167] text-white px-3 py-1 rounded-[4px] font-bold">
+                S$
+              </span>
+              <span className="text-[26px] font-bold text-white">3,000</span>
+            </div>
+          </div>
+
+          <button
+            onClick={onNewCard}
+            className="flex items-center gap-1.5 text-[#23CEFD] text-[13px] font-semibold"
+          >
+            <img src={addIcon} alt="add" className="w-4 h-4" />
+            New card
+          </button>
+        </div>
+      </div>
+
+      {/* Desktop Header */}
+      <div className="hidden md:flex justify-between items-start mb-5">
         <div>
           <div className="text-[14px] text-[#222222] mb-2.5">
             Available balance
@@ -37,10 +68,10 @@ const CardBalance: React.FC<Props> = ({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-6 border-b border-[#0000001A]">
+      <div className="flex gap-6 border-b border-[#0000001A] md:border-[#0000001A]">
         <button
           onClick={() => setActiveTab("my")}
-          className={`pb-2 text-[14px] font-semibold border-b-2 transition-colors ${
+          className={`pb-2 text-[13px] md:text-[14px] font-semibold border-b-2 transition-colors ${
             activeTab === "my"
               ? "text-[#222222] border-[#23CEFD]"
               : "text-[#222222]/30 border-transparent"
@@ -50,7 +81,7 @@ const CardBalance: React.FC<Props> = ({
         </button>
         <button
           onClick={() => setActiveTab("company")}
-          className={`pb-2 text-[14px] font-semibold border-b-2 transition-colors ${
+          className={`pb-2 text-[13px] md:text-[14px] font-semibold border-b-2 transition-colors ${
             activeTab === "company"
               ? "text-[#222222] border-[#23CEFD]"
               : "text-[#222222]/30 border-transparent"

@@ -18,6 +18,7 @@ body {
     "Segoe UI",
     Roboto,
     sans-serif;
+  background-color: #0c365a0a;
 }
 
 #root {
@@ -40,4 +41,16 @@ body {
 
 .main-content::-webkit-scrollbar-thumb:hover {
   background: #a1a1a1;
+}
+
+/* Hide scrollbar on mobile for cleaner look */
+@media (max-width: 767px) {
+  .main-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  .main-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
