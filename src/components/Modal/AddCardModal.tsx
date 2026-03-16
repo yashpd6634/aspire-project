@@ -25,7 +25,7 @@ const AddCardModal: React.FC<Props> = ({ onClose }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white p-6 rounded-[10px] w-[90%] max-w-[400px]"
+        className="bg-white p-6 rounded-[10px] w-[90%] max-w-100"
       >
         <h2 className="text-[#325BAF] text-[20px] mb-6 font-semibold">
           Add New Card

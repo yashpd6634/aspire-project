@@ -31,6 +31,7 @@ export const useCardStore = create<CardState>((set) => ({
       expiryDate: generateExpiry(),
       cvv: "456",
       frozen: false,
+      color: "#01D167",
     },
   ],
 
@@ -45,6 +46,9 @@ export const useCardStore = create<CardState>((set) => ({
           expiryDate: generateExpiry(),
           cvv: "123",
           frozen: false,
+          color:
+            "#" +
+            ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
         },
       ],
     })),

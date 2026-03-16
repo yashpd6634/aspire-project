@@ -2,12 +2,14 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useEffect } from "react";
 import Card from "./Card";
 import type { Card as CardType } from "../../types/card";
+import eyeIcon from "../../assets/remove_red_eye-24px.svg";
 
 interface Props {
   cards: CardType[];
   activeIndex: number;
   setActiveIndex: (i: number) => void;
   showNumber?: boolean;
+  onToggleShowNumber?: () => void;
 }
 
 const CardCarousel: React.FC<Props> = ({
@@ -15,6 +17,7 @@ const CardCarousel: React.FC<Props> = ({
   activeIndex,
   setActiveIndex,
   showNumber = false,
+  onToggleShowNumber,
 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
@@ -30,26 +33,43 @@ const CardCarousel: React.FC<Props> = ({
 
   return (
     <div>
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          {cards.map((card) => (
-            <div key={card.id} className="flex-[0_0_100%]">
-              <Card card={card} showNumber={showNumber} />
-            </div>
+      {/* Carousel with padding */}
+      <div className="px-5">
+        {/* Show card number toggle - Vue style */}
+        <div className="flex justify-end mb-3">
+          <button
+            onClick={onToggleShowNumber}
+            className="flex items-center text-[#01D167] text-[12px] font-bold cursor-pointer"
+          >
+            <img src={eyeIcon} className="w-4 h-4 mr-1.5" alt="eye" />
+            {showNumber ? "Hide card number" : "Show card number"}
+          </button>
+        </div>
+
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-4">
+            {cards.map((card) => (
+              <div key={card.id} className="flex-[0_0_100%] min-w-0">
+                <Card card={card} showNumber={showNumber} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation dots */}
+        <div className="flex justify-center mt-8 mb-9 gap-1">
+          {cards.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => emblaApi?.scrollTo(i)}
+              className={`h-2 rounded-full transition-all ${
+                i === activeIndex
+                  ? "w-4 bg-[#01D167]"
+                  : "w-2 bg-[#01D167] opacity-20"
+              }`}
+            />
           ))}
         </div>
-      </div>
-
-      <div className="flex justify-center mt-5 gap-2">
-        {cards.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => emblaApi?.scrollTo(i)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              i === activeIndex ? "bg-[#01D167]" : "bg-[#01D16730]"
-            }`}
-          />
-        ))}
       </div>
     </div>
   );

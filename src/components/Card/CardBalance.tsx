@@ -13,7 +13,7 @@ const CardBalance: React.FC<Props> = ({
   onNewCard,
 }) => {
   return (
-    <div className="mb-6 md:mb-8">
+    <div className="mb-4 md:mb-4">
       {/* Mobile Header - Dark Blue */}
       <div className="md:hidden bg-[#0C365A] -mx-6 -mt-6 px-6 pt-6 pb-4 mb-4">
         {/* Logo for mobile */}
@@ -27,7 +27,7 @@ const CardBalance: React.FC<Props> = ({
               Account balance
             </div>
             <div className="flex items-center gap-2.5">
-              <span className="text-[12px] bg-[#01D167] text-white px-3 py-1 rounded-[4px] font-bold">
+              <span className="text-[12px] bg-[#01D167] text-white px-3 py-1 rounded-sm font-bold">
                 S$
               </span>
               <span className="text-[26px] font-bold text-white">3,000</span>
@@ -45,13 +45,13 @@ const CardBalance: React.FC<Props> = ({
       </div>
 
       {/* Desktop Header */}
-      <div className="hidden md:flex justify-between items-start mb-5">
+      <div className="hidden md:flex justify-between items-end mb-10 pr-5">
         <div>
           <div className="text-[14px] text-[#222222] mb-2.5">
             Available balance
           </div>
           <div className="flex items-center gap-2.5">
-            <span className="text-[12px] bg-[#01D167] text-white px-3 py-1 rounded-[4px] font-bold">
+            <span className="text-[12px] bg-[#01D167] text-white px-3 py-1 rounded-sm font-bold">
               S$
             </span>
             <span className="text-[26px] font-bold text-[#222222]">3,000</span>
@@ -60,7 +60,7 @@ const CardBalance: React.FC<Props> = ({
 
         <button
           onClick={onNewCard}
-          className="flex items-center gap-1.5 bg-[#325BAF] text-white text-[13px] font-semibold px-4 py-2.5 rounded-[4px] hover:bg-[#2A4C94] transition-colors"
+          className="flex items-center gap-1.5 bg-[#325BAF] text-white text-[13px] font-semibold px-3 py-2 rounded-sm hover:bg-[#2A4C94] transition-colors"
         >
           <img src={addIcon} alt="add" className="w-4 h-4" />
           New card
@@ -68,7 +68,7 @@ const CardBalance: React.FC<Props> = ({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-6 border-b border-[#0000001A] md:border-[#0000001A]">
+      <div className="flex gap-6 border-[#0000001A] md:border-[#0000001A]">
         <button
           onClick={() => setActiveTab("my")}
           className={`pb-2 text-[13px] md:text-[14px] font-semibold border-b-2 transition-colors ${

@@ -23,7 +23,7 @@ const BottomNav = () => {
           return (
             <button
               key={item.label}
-              className="flex flex-col items-center gap-1 p-2 min-w-[60px]"
+              className="flex flex-col items-center gap-1 p-2 min-w-15"
             >
               <img
                 src={item.icon}

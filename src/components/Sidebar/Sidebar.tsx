@@ -7,11 +7,11 @@ const Sidebar: React.FC = () => {
   const activeItem = "Cards";
 
   return (
-    <aside className="hidden md:flex w-[340px] min-w-[340px] h-screen bg-[#0C365A] text-white py-12 flex-col sticky top-0 overflow-hidden">
+    <aside className="hidden md:flex w-85 min-w-85 h-screen bg-[#0C365A] text-white py-12 flex-col sticky top-0 overflow-hidden">
       <img
         src={aspireLogo}
         alt="Aspire"
-        className="h-[35px] mx-12 mr-auto mb-5"
+        className="h-8.75 mx-12 mr-auto mb-5"
       />
 
       <p className="text-[15px] text-white/30 mx-12 leading-snug">

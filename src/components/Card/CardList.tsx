@@ -7,22 +7,12 @@ import AddCardModal from "../Modal/AddCardModal";
 
 export const CardList = () => {
   const cards = useCardStore((state) => state.cards);
-  const freezeCard = useCardStore((state) => state.freezeCard);
-  const unfreezeCard = useCardStore((state) => state.unfreezeCard);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [showAddModal, setShowAddModal] = useState(false);
   const [activeTab, setActiveTab] = useState<"my" | "company">("my");
 
-  const activeCard = cards[activeIndex];
 
-  const handleFreeze = () => {
-    if (activeCard.frozen) {
-      unfreezeCard(activeCard.id);
-    } else {
-      freezeCard(activeCard.id);
-    }
-  };
 
   return (
     <div className="flex-1 bg-white min-h-screen min-w-256.5 p-15">
