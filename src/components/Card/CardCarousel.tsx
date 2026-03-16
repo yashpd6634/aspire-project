@@ -57,7 +57,7 @@ const CardCarousel: React.FC<Props> = ({
         </div>
 
         {/* Navigation dots */}
-        <div className="flex justify-center mt-8 mb-9 gap-1">
+        <div className="flex justify-center mt-4 mb-8 gap-1">
           {cards.map((_, i) => (
             <button
               key={i}
