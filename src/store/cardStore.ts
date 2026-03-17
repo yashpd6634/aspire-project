@@ -20,23 +20,36 @@ const generateCardNumber = () => {
 };
 
 const generateExpiry = () => {
-  return "12/26";
+  const month = Math.floor(1 + Math.random() * 12)
+    .toString()
+    .padStart(2, "0");
+  const year = Math.floor(26 + Math.random() * 5); // 26-30
+  return `${month}/${year}`;
 };
 
-const defaultCard: Card = {
+const generateCVV = () => {
+  return Math.floor(100 + Math.random() * 900).toString();
+};
+
+const createDefaultCard = (name: string, color: string): Card => ({
   id: uuid(),
-  cardholderName: "Mark Henry",
+  cardholderName: name,
   cardNumber: generateCardNumber(),
   expiryDate: generateExpiry(),
-  cvv: "456",
+  cvv: generateCVV(),
   frozen: false,
-  color: "#01D167",
-};
+  color,
+});
+
+const defaultCards: Card[] = [
+  createDefaultCard("Mark Henry", "#01D167"),
+  createDefaultCard("Mark Henry", "#0C365A"),
+];
 
 export const useCardStore = create<CardState>()(
   persist(
     (set) => ({
-      cards: [defaultCard],
+      cards: defaultCards,
 
       addCard: (name) =>
         set((state) => ({
@@ -47,7 +60,7 @@ export const useCardStore = create<CardState>()(
               cardholderName: name,
               cardNumber: generateCardNumber(),
               expiryDate: generateExpiry(),
-              cvv: "123",
+              cvv: generateCVV(),
               frozen: false,
               color:
                 "#" +

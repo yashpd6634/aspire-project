@@ -35,7 +35,7 @@ const Card: React.FC<Props> = ({ card, showNumber }) => {
     >
       {/* Aspire Logo */}
       <div className="flex justify-end mb-6">
-        <img src={aspireLogo} className="h-7.5" alt="Aspire" />
+        <img src={aspireLogo} className="h-6" alt="Aspire" />
       </div>
 
       {/* Cardholder Name */}
