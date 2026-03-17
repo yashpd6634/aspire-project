@@ -1,8 +1,9 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import Card from "./Card";
 import type { Card as CardType } from "../../types/card";
 import eyeIcon from "../../assets/remove_red_eye-24px.svg";
+import { COLORS } from "../../config";
 
 interface Props {
   cards: CardType[];
@@ -23,13 +24,25 @@ const CardCarousel: React.FC<Props> = ({
     loop: false,
   });
 
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setActiveIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi, setActiveIndex]);
+
   useEffect(() => {
     if (!emblaApi) return;
 
-    emblaApi.on("select", () => {
-      setActiveIndex(emblaApi.selectedScrollSnap());
-    });
-  }, [emblaApi, setActiveIndex]);
+    emblaApi.on("select", onSelect);
+
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  const handleDotClick = useCallback(
+    (index: number) => emblaApi?.scrollTo(index),
+    [emblaApi],
+  );
 
   return (
     <div className="bg-[#0C365A] md:bg-transparent">
@@ -62,12 +75,13 @@ const CardCarousel: React.FC<Props> = ({
           {cards.map((_, i) => (
             <button
               key={i}
-              onClick={() => emblaApi?.scrollTo(i)}
+              onClick={() => handleDotClick(i)}
               className={`h-2 rounded-full transition-all ${
                 i === activeIndex
-                  ? "w-4 bg-[#01D167]"
-                  : "w-2 bg-[#01D167] opacity-20"
+                  ? `w-4 bg-[${COLORS.primary}]`
+                  : `w-2 bg-[${COLORS.primary}] opacity-20`
               }`}
+              aria-label={`Go to card ${i + 1}`}
             />
           ))}
         </div>

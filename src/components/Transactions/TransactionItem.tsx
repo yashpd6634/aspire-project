@@ -1,3 +1,4 @@
+import { memo } from "react";
 import card from "../../assets/business-and-finance.svg";
 import nextArrowIcon from "../../assets/next.svg";
 
@@ -11,31 +12,35 @@ interface Props {
   description?: string;
 }
 
-const TransactionItem: React.FC<Props> = ({
-  merchant,
-  amount,
-  date,
-  icon,
-  iconBg = "#009DFF1A",
-  type,
-  description,
-}) => {
-  const isCredit = type === "credit" || amount.startsWith("+");
+const TransactionItem: React.FC<Props> = memo(
+  ({
+    merchant,
+    amount,
+    date,
+    icon,
+    iconBg = "#009DFF1A",
+    type,
+    description,
+  }) => {
+    const isCredit = type === "credit" || amount.startsWith("+");
 
-  return (
-    <div className="flex items-start gap-3 px-3 md:px-4 py-3 border-b border-[#F5F5F5]">
-      <IconContainer iconBg={iconBg} icon={icon} merchant={merchant} />
+    return (
+      <div className="flex items-start gap-3 px-3 md:px-4 py-3 border-b border-[#F5F5F5]">
+        <IconContainer iconBg={iconBg} icon={icon} merchant={merchant} />
 
-      <TransationDetails
-        merchant={merchant}
-        description={description}
-        date={date}
-      />
+        <TransationDetails
+          merchant={merchant}
+          description={description}
+          date={date}
+        />
 
-      <AmountDetails isCredit={isCredit} amount={amount} />
-    </div>
-  );
-};
+        <AmountDetails isCredit={isCredit} amount={amount} />
+      </div>
+    );
+  },
+);
+
+TransactionItem.displayName = "TransactionItem";
 
 const IconContainer = ({
   iconBg,

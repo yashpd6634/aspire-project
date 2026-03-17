@@ -37,7 +37,7 @@ const AccordionHeader: React.FC<{
     </div>
     <img
       src={isOpen ? upArrow : downArrow}
-      className={`w-5 h-5 transition-transform duration-300 ${isOpen ? "rotate-0" : "rotate-0"}`}
+      className="w-5 h-5 transition-transform duration-300"
       alt={isOpen ? "collapse" : "expand"}
     />
   </div>

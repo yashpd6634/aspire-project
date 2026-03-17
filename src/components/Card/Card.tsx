@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useMemo, memo } from "react";
 import visaLogo from "../../assets/Visa Logo.svg";
 import aspireLogo from "../../assets/Aspire Logo (1).svg";
 import type { Card as CardType } from "../../types/card";
+import { COLORS, CARD_NUMBER_GROUP_SIZE } from "../../config";
 
 interface Props {
   card: CardType;
   showNumber: boolean;
 }
 
-const CardDigit: React.FC<{
+interface CardDigitProps {
   digit: string;
   isHidden: boolean;
   isGroupEnd: boolean;
-}> = ({ digit, isHidden, isGroupEnd }) => (
+}
+
+const CardDigit = memo<CardDigitProps>(({ digit, isHidden, isGroupEnd }) => (
   <span
     className={`inline-block ${isGroupEnd ? "mr-6.75" : "mr-1.5"} ${
       isHidden ? "w-2.25 h-2.25 bg-white rounded-full text-[0px]" : ""
@@ -20,18 +23,22 @@ const CardDigit: React.FC<{
   >
     {!isHidden && digit}
   </span>
-);
+));
+
+CardDigit.displayName = "CardDigit";
 
 const Card: React.FC<Props> = ({ card, showNumber }) => {
-  const digits = card.cardNumber.replace(/\s+/g, "").split("");
+  const digits = useMemo(
+    () => card.cardNumber.replace(/\s+/g, "").split(""),
+    [card.cardNumber],
+  );
 
   return (
     <div
       className={`w-full h-62 rounded-2xl p-6.75 text-white transition-all
       ${card.frozen ? "opacity-70 grayscale" : "opacity-100"}`}
-      style={{ backgroundColor: card.color || "#01D167" }}
+      style={{ backgroundColor: card.color || COLORS.primary }}
     >
-      
       <div className="flex justify-end mb-6">
         <img src={aspireLogo} className="h-6" alt="Aspire" />
       </div>
@@ -39,20 +46,19 @@ const Card: React.FC<Props> = ({ card, showNumber }) => {
       <div className="text-[24px] font-bold tracking-[0.58px] mb-5 capitalize">
         {card.cardholderName}
       </div>
-  
+
       <div className="flex items-center text-[14px] font-bold tracking-[3.46px] mb-3">
-        {digits.map((digit, index) => {
-          const isHidden = !showNumber && index < 12;
-          const isGroupEnd = (index + 1) % 4 === 0 && index < digits.length - 1;
-          return (
-            <CardDigit
-              key={index}
-              digit={digit}
-              isHidden={isHidden}
-              isGroupEnd={isGroupEnd}
-            />
-          );
-        })}
+        {digits.map((digit, index) => (
+          <CardDigit
+            key={index}
+            digit={digit}
+            isHidden={!showNumber && index < 12}
+            isGroupEnd={
+              (index + 1) % CARD_NUMBER_GROUP_SIZE === 0 &&
+              index < digits.length - 1
+            }
+          />
+        ))}
       </div>
 
       <div className="flex items-center font-bold text-[14px] mb-2.25">

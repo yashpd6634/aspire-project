@@ -1,28 +1,31 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import freezeIcon from "../../assets/Freeze card.svg";
 import spendLimitIcon from "../../assets/Set spend limit.svg";
 import gpayIcon from "../../assets/GPay.svg";
 import replaceIcon from "../../assets/Replace card.svg";
 import deactivateIcon from "../../assets/Deactivate card.svg";
+import { COLORS } from "../../config";
 
 interface Props {
   frozen: boolean;
   onFreeze: () => void;
 }
 
-const ActionButton: React.FC<{
+const ActionButton = memo<{
   icon: string;
   label: string;
   onClick: () => void;
-}> = ({ icon, label, onClick }) => (
+}>(({ icon, label, onClick }) => (
   <button
     onClick={onClick}
-    className="flex flex-col items-center cursor-pointer text-center text-[13px] leading-[1.2] text-[#0C365A] hover:opacity-80 transition-opacity"
+    className={`flex flex-col items-center cursor-pointer text-center text-[13px] leading-[1.2] text-[${COLORS.secondary}] hover:opacity-80 transition-opacity`}
   >
     <img src={icon} className="w-8 h-8 mb-1.75" alt={label} />
     <span className="whitespace-pre-line">{label}</span>
   </button>
-);
+));
+
+ActionButton.displayName = "ActionButton";
 
 const CardActions: React.FC<Props> = ({ frozen, onFreeze }) => {
   const actions = useMemo(
