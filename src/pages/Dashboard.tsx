@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [showCardNumber, setShowCardNumber] = useState(false);
-  const [activeTab, setActiveTab] = useState<"my" | "company">("my");
+  const [activeTab, setActiveTab] = useState("my");
   const [showAddModal, setShowAddModal] = useState(false);
   const [cardDetailsOpen, setCardDetailsOpen] = useState(false);
   const [transactionsOpen, setTransactionsOpen] = useState(true);
@@ -49,54 +49,67 @@ const Dashboard = () => {
             onNewCard={() => setShowAddModal(true)}
           />
 
-          <div className="flex flex-col md:flex-row gap-6 pt-0 pb-0 md:pt-10 md:pl-5 md:pr-5 md:pb-10 md:gap-7.5 bg-[#0C365A] md:bg-white rounded-lg card-container-shadow">
-            {/* Left Section - Card */}
-            <div className="w-full md:w-126.5">
-              <CardCarousel
-                cards={cards}
-                activeIndex={activeIndex}
-                setActiveIndex={setActiveIndex}
-                showNumber={showCardNumber}
-                onToggleShowNumber={() => setShowCardNumber(!showCardNumber)}
-              />
-
-              <CardActions
-                frozen={currentCard?.frozen ?? false}
-                onFreeze={handleFreeze}
-              />
-            </div>
-
-            {/* Right Section - Details & Transactions */}
-            <div className="flex-1 md:max-w-126.5 bg-white px-4 pt-6 md:px-0 md:pt-0">
-              {/* Card Details Accordion */}
-              <div className="bg-white rounded-[10px] overflow-hidden shadow-sm">
-                <TransactionHeader
-                  title="Card details"
-                  icon="/icons/card-details.svg"
-                  isOpen={cardDetailsOpen}
-                  onClick={() => setCardDetailsOpen(!cardDetailsOpen)}
+          {activeTab === "my" ? (
+            <div className="flex flex-col md:flex-row gap-6 pt-0 pb-0 md:pt-10 md:pl-5 md:pr-5 md:pb-10 md:gap-7.5 bg-[#0C365A] md:bg-white rounded-lg card-container-shadow overflow-hidden">
+              {/* Left Section - Card */}
+              <div className="w-full md:flex-1 md:min-w-0">
+                <CardCarousel
+                  cards={cards}
+                  activeIndex={activeIndex}
+                  setActiveIndex={setActiveIndex}
+                  showNumber={showCardNumber}
+                  onToggleShowNumber={() => setShowCardNumber(!showCardNumber)}
                 />
-                {cardDetailsOpen && (
-                  <div className="p-4 border-x border-b border-[#F0F0F0]">
-                    <p className="text-[13px] text-[#222]">
-                      Card details content here...
-                    </p>
-                  </div>
-                )}
+
+                <CardActions
+                  frozen={currentCard?.frozen ?? false}
+                  onFreeze={handleFreeze}
+                />
               </div>
 
-              {/* Recent Transactions Accordion */}
-              <div className="bg-white rounded-[10px] overflow-hidden shadow-sm mt-4 md:mt-6">
-                <TransactionHeader
-                  title="Recent transactions"
-                  icon="/icons/transactions.svg"
-                  isOpen={transactionsOpen}
-                  onClick={() => setTransactionsOpen(!transactionsOpen)}
-                />
-                {transactionsOpen && <TransactionList />}
+              {/* Right Section - Details & Transactions */}
+              <div className="w-full md:flex-1 md:min-w-0 bg-white px-4 pt-6 md:px-0 md:pt-0">
+                {/* Card Details Accordion */}
+                <div className="bg-white rounded-[10px] overflow-hidden shadow-sm">
+                  <TransactionHeader
+                    title="Card details"
+                    icon="/icons/card.svg"
+                    isOpen={cardDetailsOpen}
+                    onClick={() => setCardDetailsOpen(!cardDetailsOpen)}
+                  />
+                  {cardDetailsOpen && (
+                    <div className="p-4 border-x border-b border-[#F0F0F0]">
+                      <p className="text-[13px] text-[#222]">
+                        Card details content here...
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Recent Transactions Accordion */}
+                <div className="bg-white rounded-[10px] overflow-hidden shadow-sm mt-4 md:mt-6">
+                  <TransactionHeader
+                    title="Recent transactions"
+                    icon="/icons/transaction.svg"
+                    isOpen={transactionsOpen}
+                    onClick={() => setTransactionsOpen(!transactionsOpen)}
+                  />
+                  {transactionsOpen && <TransactionList />}
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex items-center justify-center py-20 md:py-32 bg-white rounded-lg card-container-shadow">
+              <div className="text-center">
+                <p className="text-[18px] font-semibold text-[#222222] mb-2">
+                  Coming Soon
+                </p>
+                <p className="text-[14px] text-[#AAAAAA]">
+                  All company cards feature is not available yet.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </main>
 

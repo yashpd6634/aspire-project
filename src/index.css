@@ -19,6 +19,15 @@ body {
     Roboto,
     sans-serif;
   background-color: #0c365a0a;
+  user-select: none;
+  cursor: default;
+}
+
+/* Allow text selection in input fields */
+input,
+textarea {
+  user-select: text;
+  cursor: text;
 }
 
 #root {

@@ -17,7 +17,7 @@ const TransactionHeader: React.FC<Props> = ({
   return (
     <div
       onClick={onClick}
-      className="flex justify-between items-center px-4 md:px-6 py-4 md:py-5 bg-[#F5F9FF] border border-[#F0F0F0] cursor-pointer hover:bg-[#EDF3FF] transition-colors rounded-t-[10px]"
+      className="flex justify-between items-center px-4 md:px-6 py-4 md:py-5 bg-[#F5F9FF] border border-[#F5F5F5] cursor-pointer hover:bg-[#EDF3FF] transition-colors rounded-t-[10px]"
     >
       <div className="flex items-center gap-3">
         <img

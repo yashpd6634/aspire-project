@@ -1,3 +1,6 @@
+import card from "../../assets/business-and-finance.svg";
+import nextArrowIcon from "../../assets/next.svg";
+
 interface Props {
   merchant: string;
   amount: string;
@@ -26,7 +29,7 @@ const TransactionItem: React.FC<Props> = ({
         className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center shrink-0"
         style={{ backgroundColor: iconBg }}
       >
-        <img src={icon} alt={merchant} className="w-5 h-5 md:w-6 md:h-6" />
+        <img src={icon} alt={merchant} className="w-4 h-4 md:w-4 md:h-4" />
       </div>
 
       {/* Details */}
@@ -37,12 +40,12 @@ const TransactionItem: React.FC<Props> = ({
         <div className="text-[12px] md:text-[13px] text-[#AAAAAA]">{date}</div>
         {description && (
           <div className="flex items-center gap-1.5 mt-1.5 md:mt-2">
-            <div className="w-5 h-4 md:w-6 md:h-5 rounded bg-[#325BAF] flex items-center justify-center">
+            <div className="w-5 h-4 md:w-6 md:h-5 rounded-4xl bg-[#325BAF] flex items-center justify-center">
               <span className="text-white text-[7px] md:text-[8px] font-bold">
-                💳
+                <img src={card} alt="info" className="w-2.5 h-2.5" />
               </span>
             </div>
-            <span className="text-[11px] md:text-[12px] text-[#325BAF]">
+            <span className="text-[11px] md:text-[12px] font-semibold text-[#325BAF]">
               {description}
             </span>
           </div>
@@ -58,15 +61,11 @@ const TransactionItem: React.FC<Props> = ({
         >
           {amount}
         </span>
-        <svg
-          className="w-4 h-4 text-[#325BAF]"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path d="M9 18l6-6-6-6" />
-        </svg>
+        <img
+          src={nextArrowIcon}
+          alt="details"
+          className="w-3 h-3 md:w-4 md:h-4"
+        />
       </div>
     </div>
   );

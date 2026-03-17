@@ -5,6 +5,7 @@ export { default as Card } from "./Card/Card";
 export { default as CardBalance } from "./Card/CardBalance";
 export { default as CardCarousel } from "./Card/CardCarousel";
 export { default as CardActions } from "./Card/CardActions";
+export { CardTabs } from "./Tabs";
 
 export { default as AddCardModal } from "./Modal/AddCardModal";
 

@@ -1,9 +1,16 @@
 import addIcon from "../../assets/add.svg";
-import aspireLogo from "../../assets/Aspire Logo.svg";
+import addBlueIcon from "../../assets/box.svg";
+import aspireMiniLogo from "../../assets/Logo1.svg";
+import CardTabs from "../Tabs/CardTabs";
+
+const CARD_TABS = [
+  { id: "my", label: "My debit cards" },
+  { id: "company", label: "All company cards" },
+];
 
 interface Props {
-  activeTab: "my" | "company";
-  setActiveTab: (tab: "my" | "company") => void;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
   onNewCard: () => void;
 }
 
@@ -15,13 +22,13 @@ const CardBalance: React.FC<Props> = ({
   return (
     <div className="mb-4 md:mb-4">
       {/* Mobile Header - Dark Blue */}
-      <div className="md:hidden bg-[#0C365A] px-6 pt-6 pb-4 mb-0">
+      <div className="md:hidden bg-[#0C365A] px-6 pt-4 pb-4 mb-0">
         {/* Logo for mobile */}
-        <div className="flex justify-end mb-6">
-          <img src={aspireLogo} alt="Aspire" className="h-6" />
+        <div className="flex justify-end -mb-2.5">
+          <img src={aspireMiniLogo} alt="Aspire" className="h-6" />
         </div>
 
-        <div className="flex justify-between items-start">
+        <div className="flex justify-between items-end">
           <div>
             <div className="text-[14px] text-white/60 mb-2">
               Account balance
@@ -36,16 +43,16 @@ const CardBalance: React.FC<Props> = ({
 
           <button
             onClick={onNewCard}
-            className="flex items-center gap-1.5 text-[#23CEFD] text-[13px] font-semibold"
+            className="flex items-center pb-3 gap-1.5 text-[#23CEFD] text-[13px] font-semibold"
           >
-            <img src={addIcon} alt="add" className="w-4 h-4" />
+            <img src={addBlueIcon} alt="add" className="w-4 h-4" />
             New card
           </button>
         </div>
       </div>
 
       {/* Desktop Header */}
-      <div className="hidden md:flex justify-between items-end mb-10 pr-5">
+      <div className="hidden md:flex justify-between items-end mb-8 pr-5">
         <div>
           <div className="text-[14px] text-[#222222] mb-2.5">
             Available balance
@@ -68,28 +75,11 @@ const CardBalance: React.FC<Props> = ({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-6 px-6 md:px-0 border-[#0000001A] md:border-[#0000001A]">
-        <button
-          onClick={() => setActiveTab("my")}
-          className={`pb-2 text-[13px] md:text-[14px] font-semibold border-b-2 transition-colors ${
-            activeTab === "my"
-              ? "text-white md:text-[#222222] border-[#23CEFD]"
-              : "text-white/30 md:text-[#222222]/30 border-transparent"
-          }`}
-        >
-          My debit cards
-        </button>
-        <button
-          onClick={() => setActiveTab("company")}
-          className={`pb-2 text-[13px] md:text-[14px] font-semibold border-b-2 transition-colors ${
-            activeTab === "company"
-              ? "text-white md:text-[#222222] border-[#23CEFD]"
-              : "text-white/30 md:text-[#222222]/30 border-transparent"
-          }`}
-        >
-          All company cards
-        </button>
-      </div>
+      <CardTabs
+        tabs={CARD_TABS}
+        activeTab={activeTab}
+        onChange={setActiveTab}
+      />
     </div>
   );
 };
