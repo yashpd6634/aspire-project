@@ -54,7 +54,7 @@ const TransactionList = () => {
         <TransactionItem key={tx.id} {...tx} />
       ))}
 
-      <div className="text-center py-4 text-[13px] text-[#01D167] font-semibold bg-[#EDFFF5] rounded-b-[14px] cursor-pointer hover:bg-[#01D1671A] transition-colors">
+      <div className="text-center py-4 text-[13px] text-[#01D167] font-semibold bg-[#EDFFF5] rounded-b-none md:rounded-b-[14px] cursor-pointer hover:bg-[#01D1671A] transition-colors">
         View all card transactions
       </div>
     </div>

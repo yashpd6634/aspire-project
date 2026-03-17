@@ -19,7 +19,7 @@ const AccordionHeader: React.FC<{
 }> = ({ title, icon, isOpen, onToggle }) => (
   <div
     onClick={onToggle}
-    className="flex justify-between items-center px-4 md:px-6 py-4 md:py-5 bg-[#F5F9FF] border border-[#F5F5F5] cursor-pointer hover:bg-[#EDF3FF] transition-colors rounded-t-[10px]"
+    className="flex justify-between items-center px-4 md:px-6 py-4 md:py-5 bg-[#F5F9FF] border border-[#F5F5F5] cursor-pointer hover:bg-[#EDF3FF] transition-colors rounded-t-none md:rounded-t-[10px]"
   >
     <div className="flex items-center gap-3">
       {icon && (
@@ -55,7 +55,7 @@ const Accordion: React.FC<AccordionProps> = ({
 }) => {
   return (
     <div
-      className={`bg-white rounded-[10px] overflow-hidden shadow-sm ${className}`}
+      className={`bg-white rounded-none md:rounded-[10px] overflow-hidden shadow-sm ${className}`}
     >
       <AccordionHeader
         title={title}

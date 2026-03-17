@@ -12,7 +12,7 @@ import {
 
 import { useCardStore } from "../store/cardStore";
 
-const Dashboard = () => {
+const CardDashboard = () => {
   const cards = useCardStore((state) => state.cards);
   const freezeCard = useCardStore((state) => state.freezeCard);
   const unfreezeCard = useCardStore((state) => state.unfreezeCard);
@@ -50,7 +50,7 @@ const Dashboard = () => {
           />
 
           {activeTab === "my" ? (
-            <div className="flex flex-col md:flex-row gap-6 pt-0 pb-0 md:pt-10 md:pl-5 md:pr-5 md:pb-10 md:gap-7.5 bg-[#0C365A] md:bg-white rounded-lg card-container-shadow overflow-hidden">
+            <div className="flex flex-col md:flex-row pt-0 pb-0 md:pt-10 md:pl-5 md:pr-5 md:pb-10 md:gap-7.5 bg-[#0C365A] md:bg-white rounded-lg card-container-shadow overflow-hidden">
               {/* Left Section - Card */}
               <div className="w-full md:flex-1 md:min-w-0">
                 <CardCarousel
@@ -119,4 +119,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default CardDashboard;
