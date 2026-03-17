@@ -1,15 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useCardStore } from "../../store/cardStore";
 import aspireLogo from "../../assets/Aspire Logo (1).svg";
+
+const cardSchema = z.object({
+  cardholderName: z
+    .string()
+    .min(1, "Name is required")
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be less than 50 characters")
+    .regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
+});
+
+type CardFormData = z.infer<typeof cardSchema>;
 
 interface Props {
   onClose: () => void;
 }
 
 const AddCardModal: React.FC<Props> = ({ onClose }) => {
-  const [cardholderName, setCardholderName] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = React.useState(false);
   const addCard = useCardStore((state) => state.addCard);
+
+  const formMethods = useForm<CardFormData>({
+    resolver: zodResolver(cardSchema),
+    mode: "onChange",
+    defaultValues: { cardholderName: "" },
+  });
+
+  const cardholderName = formMethods.watch("cardholderName");
 
   useEffect(() => {
     requestAnimationFrame(() => setIsVisible(true));
@@ -20,10 +41,8 @@ const AddCardModal: React.FC<Props> = ({ onClose }) => {
     setTimeout(onClose, 200);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!cardholderName.trim()) return;
-    addCard(cardholderName.trim());
+  const onSubmit = (data: CardFormData) => {
+    addCard(data.cardholderName.trim());
     handleClose();
   };
 
@@ -41,14 +60,11 @@ const AddCardModal: React.FC<Props> = ({ onClose }) => {
         }`}
       >
         <ModalHeader />
-
         <CardPreview cardholderName={cardholderName} />
-
         <AddCardForm
-          cardholderName={cardholderName}
-          setCardholderName={setCardholderName}
+          formMethods={formMethods}
+          onSubmit={onSubmit}
           onCancel={handleClose}
-          onSubmit={handleSubmit}
         />
       </div>
     </div>
@@ -151,33 +167,54 @@ const FormActions: React.FC<{
   </div>
 );
 
-const AddCardForm: React.FC<{
-  cardholderName: string;
-  setCardholderName: (name: string) => void;
+interface AddCardFormProps {
+  formMethods: ReturnType<typeof useForm<CardFormData>>;
+  onSubmit: (data: CardFormData) => void;
   onCancel: () => void;
-  onSubmit: (e: React.FormEvent) => void;
-}> = ({ cardholderName, setCardholderName, onCancel, onSubmit }) => (
-  <form onSubmit={onSubmit} className="p-6 pt-5">
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-semibold text-[#222] mb-2">
-          Cardholder Name
-        </label>
-        <input
-          type="text"
-          placeholder="Enter your full name"
-          value={cardholderName}
-          onChange={(e) => setCardholderName(e.target.value)}
-          autoFocus
-          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-[#01D167] transition-colors text-[15px]"
-        />
+}
+
+const AddCardForm: React.FC<AddCardFormProps> = ({
+  formMethods,
+  onSubmit,
+  onCancel,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = formMethods;
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="p-6 pt-5">
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-semibold text-[#222] mb-2">
+            Cardholder Name
+          </label>
+          <input
+            type="text"
+            placeholder="Enter your full name"
+            {...register("cardholderName")}
+            autoFocus
+            className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors text-[15px] ${
+              errors.cardholderName
+                ? "border-red-400 focus:border-red-500"
+                : "border-gray-200 focus:border-[#01D167]"
+            }`}
+          />
+          {errors.cardholderName && (
+            <p className="text-red-500 text-xs mt-1.5">
+              {errors.cardholderName.message}
+            </p>
+          )}
+        </div>
+
+        <InfoBox />
       </div>
 
-      <InfoBox />
-    </div>
-
-    <FormActions onCancel={onCancel} isDisabled={!cardholderName.trim()} />
-  </form>
-);
+      <FormActions onCancel={onCancel} isDisabled={!isValid} />
+    </form>
+  );
+};
 
 export default AddCardModal;
