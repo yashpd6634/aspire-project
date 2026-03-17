@@ -1,7 +1,7 @@
 import addIcon from "../../assets/add.svg";
 import addBlueIcon from "../../assets/box.svg";
 import aspireMiniLogo from "../../assets/Logo1.svg";
-import CardTabs from "../Tabs/CardTabs";
+import CardTabs from "./CardTabs";
 
 const CARD_TABS = [
   { id: "my", label: "My debit cards" },

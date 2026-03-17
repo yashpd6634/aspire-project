@@ -1,7 +1,7 @@
 import React from "react";
 import aspireLogo from "../../assets/Aspire Logo.svg";
 import SidebarNavItem from "./SidebarNavItem";
-import { sidebarItems } from "./sidebar.config";
+import { NAV_ITEMS } from "../../config/navigation";
 
 const Sidebar: React.FC = () => {
   const activeItem = "Cards";
@@ -19,7 +19,7 @@ const Sidebar: React.FC = () => {
       </p>
 
       <nav className="mt-25 flex flex-col gap-13">
-        {sidebarItems.map((item) => (
+        {NAV_ITEMS.map((item) => (
           <SidebarNavItem
             key={item.label}
             icon={item.icon}

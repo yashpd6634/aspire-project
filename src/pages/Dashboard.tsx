@@ -5,7 +5,7 @@ import {
   CardBalance,
   CardCarousel,
   CardActions,
-  TransactionHeader,
+  Accordion,
   TransactionList,
   AddCardModal,
 } from "../components";
@@ -70,32 +70,29 @@ const Dashboard = () => {
               {/* Right Section - Details & Transactions */}
               <div className="w-full md:flex-1 md:min-w-0 bg-white px-4 pt-6 md:px-0 md:pt-0">
                 {/* Card Details Accordion */}
-                <div className="bg-white rounded-[10px] overflow-hidden shadow-sm">
-                  <TransactionHeader
-                    title="Card details"
-                    icon="/icons/card.svg"
-                    isOpen={cardDetailsOpen}
-                    onClick={() => setCardDetailsOpen(!cardDetailsOpen)}
-                  />
-                  {cardDetailsOpen && (
-                    <div className="p-4 border-x border-b border-[#F0F0F0]">
-                      <p className="text-[13px] text-[#222]">
-                        Card details content here...
-                      </p>
-                    </div>
-                  )}
-                </div>
+                <Accordion
+                  title="Card details"
+                  icon="/icons/card.svg"
+                  isOpen={cardDetailsOpen}
+                  onToggle={() => setCardDetailsOpen(!cardDetailsOpen)}
+                >
+                  <div className="p-4 border-x border-b border-[#F0F0F0]">
+                    <p className="text-[13px] text-[#222]">
+                      Card details content here...
+                    </p>
+                  </div>
+                </Accordion>
 
                 {/* Recent Transactions Accordion */}
-                <div className="bg-white rounded-[10px] overflow-hidden shadow-sm mt-4 md:mt-6">
-                  <TransactionHeader
-                    title="Recent transactions"
-                    icon="/icons/transaction.svg"
-                    isOpen={transactionsOpen}
-                    onClick={() => setTransactionsOpen(!transactionsOpen)}
-                  />
-                  {transactionsOpen && <TransactionList />}
-                </div>
+                <Accordion
+                  title="Recent transactions"
+                  icon="/icons/transaction.svg"
+                  isOpen={transactionsOpen}
+                  onToggle={() => setTransactionsOpen(!transactionsOpen)}
+                  className="mt-4 md:mt-6"
+                >
+                  <TransactionList />
+                </Accordion>
               </div>
             </div>
           ) : (

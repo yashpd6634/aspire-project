@@ -3,13 +3,13 @@ interface Tab {
   label: string;
 }
 
-interface Props {
+interface CardTabsProps {
   tabs: Tab[];
   activeTab: string;
   onChange: (tabId: string) => void;
 }
 
-const CardTabs: React.FC<Props> = ({ tabs, activeTab, onChange }) => {
+const CardTabs: React.FC<CardTabsProps> = ({ tabs, activeTab, onChange }) => {
   return (
     <div className="flex gap-6 px-6 md:px-0">
       {tabs.map((tab) => (
