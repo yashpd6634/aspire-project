@@ -33,9 +33,9 @@ const CardCarousel: React.FC<Props> = ({
 
   return (
     <div className="bg-[#0C365A] md:bg-transparent">
-      {/* Carousel with padding */}
+      {/* Carousel */}
       <div className="px-6 md:px-5">
-        {/* Show card number toggle - Vue style */}
+        {/* Show card number toggle */}
         <div className="flex justify-end mb-3">
           <button
             onClick={onToggleShowNumber}
@@ -46,6 +46,7 @@ const CardCarousel: React.FC<Props> = ({
           </button>
         </div>
 
+        {/* Cards */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex gap-4">
             {cards.map((card) => (

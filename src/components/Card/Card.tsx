@@ -8,7 +8,6 @@ interface Props {
   showNumber: boolean;
 }
 
-// Render individual digit - either as visible number or hidden dot
 const CardDigit: React.FC<{
   digit: string;
   isHidden: boolean;
@@ -24,7 +23,6 @@ const CardDigit: React.FC<{
 );
 
 const Card: React.FC<Props> = ({ card, showNumber }) => {
-  // Split card number into individual digits
   const digits = card.cardNumber.replace(/\s+/g, "").split("");
 
   return (
@@ -33,17 +31,15 @@ const Card: React.FC<Props> = ({ card, showNumber }) => {
       ${card.frozen ? "opacity-70 grayscale" : "opacity-100"}`}
       style={{ backgroundColor: card.color || "#01D167" }}
     >
-      {/* Aspire Logo */}
+      
       <div className="flex justify-end mb-6">
         <img src={aspireLogo} className="h-6" alt="Aspire" />
       </div>
 
-      {/* Cardholder Name */}
       <div className="text-[24px] font-bold tracking-[0.58px] mb-5 capitalize">
         {card.cardholderName}
       </div>
-
-      {/* Card Number */}
+  
       <div className="flex items-center text-[14px] font-bold tracking-[3.46px] mb-3">
         {digits.map((digit, index) => {
           const isHidden = !showNumber && index < 12;
@@ -59,7 +55,6 @@ const Card: React.FC<Props> = ({ card, showNumber }) => {
         })}
       </div>
 
-      {/* Expiry & CVV */}
       <div className="flex items-center font-bold text-[14px] mb-2.25">
         <div className="flex mr-9">
           <span className="mr-1">Thru:</span>
@@ -71,7 +66,6 @@ const Card: React.FC<Props> = ({ card, showNumber }) => {
         </div>
       </div>
 
-      {/* Visa Logo */}
       <div className="flex justify-end">
         <img src={visaLogo} className="h-6.5" alt="Visa" />
       </div>

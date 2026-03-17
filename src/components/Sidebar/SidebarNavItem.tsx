@@ -1,14 +1,13 @@
 import React from "react";
 import clsx from "clsx";
+import type { SidebarNavItem } from "../../types/sidebarNavItem";
 
-interface Props {
-  icon: string;
-  label: string;
-  active?: boolean;
-  onClick?: () => void;
-}
-
-const SidebarNavItem: React.FC<Props> = ({ icon, label, active, onClick }) => {
+const SidebarNavItem: React.FC<SidebarNavItem> = ({
+  icon,
+  label,
+  active,
+  onClick,
+}) => {
   return (
     <div
       onClick={onClick}

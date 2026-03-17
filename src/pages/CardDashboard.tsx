@@ -24,7 +24,7 @@ const CardDashboard = () => {
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <main className="flex-1 bg-[#0C365A] md:bg-white min-h-screen md:h-screen overflow-y-auto pb-0 md:pb-0">
+      <main className="main-content flex-1 bg-[#0C365A] md:bg-white min-h-screen md:h-screen overflow-y-auto pb-0 md:pb-0">
         <div className="p-0 md:p-15">
           <CardBalance
             activeTab={activeTab}

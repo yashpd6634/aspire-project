@@ -72,11 +72,10 @@ const MyCardsSection: React.FC<MyCardsSectionProps> = ({
   );
 };
 
-// Sub-component for card details content
 const CardDetailsContent = () => (
   <div className="p-4 border-x border-b border-[#F0F0F0]">
     <p className="text-[13px] text-[#222]">Card details content here...</p>
   </div>
-);
+); 
 
 export default MyCardsSection;

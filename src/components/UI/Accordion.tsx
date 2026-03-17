@@ -10,7 +10,6 @@ interface AccordionProps {
   className?: string;
 }
 
-// Header sub-component - can be used standalone if needed
 const AccordionHeader: React.FC<{
   title: string;
   icon?: string;
@@ -38,13 +37,12 @@ const AccordionHeader: React.FC<{
     </div>
     <img
       src={isOpen ? upArrow : downArrow}
-      className="w-5 h-5"
+      className={`w-5 h-5 transition-transform duration-300 ${isOpen ? "rotate-0" : "rotate-0"}`}
       alt={isOpen ? "collapse" : "expand"}
     />
   </div>
 );
 
-// Full Accordion with content
 const Accordion: React.FC<AccordionProps> = ({
   title,
   icon,
@@ -63,11 +61,16 @@ const Accordion: React.FC<AccordionProps> = ({
         isOpen={isOpen}
         onToggle={onToggle}
       />
-      {isOpen && children}
+      <div
+        className={`grid transition-all duration-300 ease-in-out ${
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">{children}</div>
+      </div>
     </div>
   );
 };
 
-// Export both for flexibility
 export { Accordion, AccordionHeader };
 export default Accordion;

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import freezeIcon from "../../assets/Freeze card.svg";
 import spendLimitIcon from "../../assets/Set spend limit.svg";
 import gpayIcon from "../../assets/GPay.svg";
@@ -9,7 +10,6 @@ interface Props {
   onFreeze: () => void;
 }
 
-// Individual action button component
 const ActionButton: React.FC<{
   icon: string;
   label: string;
@@ -20,41 +20,41 @@ const ActionButton: React.FC<{
     className="flex flex-col items-center cursor-pointer text-center text-[13px] leading-[1.2] text-[#0C365A] hover:opacity-80 transition-opacity"
   >
     <img src={icon} className="w-8 h-8 mb-1.75" alt={label} />
-    <span
-      className="whitespace-pre-line"
-      dangerouslySetInnerHTML={{ __html: label.replace(" ", "<br/>") }}
-    />
+    <span className="whitespace-pre-line">{label}</span>
   </button>
 );
 
 const CardActions: React.FC<Props> = ({ frozen, onFreeze }) => {
-  const actions = [
-    {
-      icon: freezeIcon,
-      label: frozen ? "Unfreeze card" : "Freeze card",
-      onClick: onFreeze,
-    },
-    {
-      icon: spendLimitIcon,
-      label: "Set spend limit",
-      onClick: () => {},
-    },
-    {
-      icon: gpayIcon,
-      label: "Add to GPay",
-      onClick: () => {},
-    },
-    {
-      icon: replaceIcon,
-      label: "Replace card",
-      onClick: () => {},
-    },
-    {
-      icon: deactivateIcon,
-      label: "Cancel card",
-      onClick: () => {},
-    },
-  ];
+  const actions = useMemo(
+    () => [
+      {
+        icon: freezeIcon,
+        label: frozen ? "Unfreeze\ncard" : "Freeze\ncard",
+        onClick: onFreeze,
+      },
+      {
+        icon: spendLimitIcon,
+        label: "Set spend\nlimit",
+        onClick: () => {},
+      },
+      {
+        icon: gpayIcon,
+        label: "Add to\nGPay",
+        onClick: () => {},
+      },
+      {
+        icon: replaceIcon,
+        label: "Replace\ncard",
+        onClick: () => {},
+      },
+      {
+        icon: deactivateIcon,
+        label: "Cancel\ncard",
+        onClick: () => {},
+      },
+    ],
+    [frozen, onFreeze],
+  );
 
   return (
     <div className="flex justify-around items-center bg-[#EDF3FF] mx-0 md:mx-5 p-5 h-29 rounded-t-2xl rounded-b-none md:rounded-2xl">

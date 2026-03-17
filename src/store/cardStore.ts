@@ -43,7 +43,7 @@ const createDefaultCard = (name: string, color: string): Card => ({
 
 const defaultCards: Card[] = [
   createDefaultCard("Mark Henry", "#01D167"),
-  createDefaultCard("Mark Henry", "#0C365A"),
+  createDefaultCard("Jack Henry", "#0ff1dA"),
 ];
 
 export const useCardStore = create<CardState>()(
