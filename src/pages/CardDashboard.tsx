@@ -2,23 +2,14 @@ import {
   Sidebar,
   BottomNav,
   CardBalance,
-  MyCardsSection,
-  CompanyCardsPlaceholder,
   AddCardModal,
+  renderTabContent,
 } from "../components";
 import { useCardDashboard } from "../hooks";
 
 const CardDashboard = () => {
-  const {
-    cards,
-    freezeCard,
-    unfreezeCard,
-    activeTab,
-    setActiveTab,
-    showAddModal,
-    openAddModal,
-    closeAddModal,
-  } = useCardDashboard();
+  const { activeTab, setActiveTab, showAddModal, openAddModal, closeAddModal } =
+    useCardDashboard();
 
   return (
     <div className="flex min-h-screen">
@@ -32,15 +23,7 @@ const CardDashboard = () => {
             onNewCard={openAddModal}
           />
 
-          {activeTab === "my" ? (
-            <MyCardsSection
-              cards={cards}
-              onFreeze={freezeCard}
-              onUnfreeze={unfreezeCard}
-            />
-          ) : (
-            <CompanyCardsPlaceholder />
-          )}
+          {renderTabContent(activeTab)}
         </div>
       </main>
 
