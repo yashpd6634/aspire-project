@@ -1,4 +1,3 @@
-import { useCardDashboard } from "../../hooks";
 import CompanyCardsPlaceholder from "./CompanyCardsPlaceholder";
 import MyCardsSection from "./MyCardsSection";
 
@@ -14,8 +13,8 @@ const TAB_CONTENT: Record<string, React.FC<any>> = {
   // Add more tab content mappings here as needed
 };
 
-const renderTabContent = (activeTab: string) => {
-  const { cards, freezeCard, unfreezeCard } = useCardDashboard();
+const renderTabContent = (cardDashboardLogic: any) => {
+  const { activeTab, cards, freezeCard, unfreezeCard } = cardDashboardLogic;
 
   const TabContent = TAB_CONTENT[activeTab];
   if (!TabContent) return null;

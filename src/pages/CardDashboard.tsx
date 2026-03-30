@@ -8,8 +8,10 @@ import {
 import { useCardDashboard } from "../hooks";
 
 const CardDashboard = () => {
+  const cardDashboardLogic = useCardDashboard();
+
   const { activeTab, setActiveTab, showAddModal, openAddModal, closeAddModal } =
-    useCardDashboard();
+    cardDashboardLogic;
 
   return (
     <div className="flex min-h-screen">
@@ -23,7 +25,7 @@ const CardDashboard = () => {
             onNewCard={openAddModal}
           />
 
-          {renderTabContent(activeTab)}
+          {renderTabContent(cardDashboardLogic)}
         </div>
       </main>
 
